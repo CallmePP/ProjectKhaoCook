@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import HomeScreen from "./screens/HomeScreen";
+import RandomMenuScreen from "./screens/RandomMenuScreen";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="RandomMenu" component={RandomMenuScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
