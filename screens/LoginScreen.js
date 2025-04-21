@@ -3,14 +3,13 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from "react
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import GoogleLoginButton from "../components/GoogleLoginButton";
-import { useNavigation } from "@react-navigation/native"; // ใช้ useNavigation hook
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
-  const navigation = useNavigation(); // ใช้ hook สำหรับการนำทาง
+  const navigation = useNavigation();
 
-  // ฟังก์ชัน handleLogin ที่จะนำทางไปหน้า HomeScreen
   const handleLogin = () => {
-    navigation.navigate("MainTabs"); // ไปที่ TabNavigator ที่เป็นหน้าหลัก
+    navigation.navigate("MainTabs");
   };
 
   return (
@@ -22,19 +21,24 @@ const LoginScreen = () => {
       <View style={styles.overlay}>
         <Text style={styles.title}>KhaoCook</Text>
 
-        {/* ฟอร์ม Login */}
         <View style={styles.form}>
           <Text style={styles.header}>Login</Text>
           <InputField placeholder="Email" />
           <InputField placeholder="Password" secureTextEntry />
+          
           <TouchableOpacity>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
 
-          {/* ปุ่ม Login */}
-          <Button title="Login" onPress={handleLogin} /> {/* เรียกใช้ handleLogin */}
+          <Button title="Login" onPress={handleLogin} />
 
-          <Text style={styles.orText}>──────── or ────────</Text>
+          {/* Divider with "or" */}
+          <View style={styles.orContainer}>
+            <View style={styles.line} />
+            <Text style={styles.orText}>or</Text>
+            <View style={styles.line} />
+          </View>
+
           <GoogleLoginButton onPress={() => {}} />
 
           <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#6C3414",
     marginTop: 40,
-    top: 40
+    top: 40,
   },
   form: {
     flex: 1,
@@ -86,18 +90,27 @@ const styles = StyleSheet.create({
     color: "#6D4C41",
     marginBottom: 1,
     alignSelf: "center",
-    top: -20
+    top: -20,
   },
   forgotPassword: {
     color: "#6D4C41",
     textAlign: "right",
     marginBottom: 10,
   },
+  orContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#aaa",
+  },
   orText: {
-    textAlign: "center",
-    marginVertical: 10,
-    color: "#000000",
-    marginBottom: 30,
+    marginHorizontal: 10,
+    color: "#000",
+    fontSize: 16,
   },
   signUpText: {
     textAlign: "center",
