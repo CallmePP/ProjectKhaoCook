@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const TabBarItem = ({ label, icon, onPress, isActive }) => {
-  const color = isActive ? '#FFC9AA' : '#ccc';
+  const color = isActive ? '#d36c00' : '#ccc';
 
   return (
     <TouchableOpacity style={{ alignItems: 'center' }} onPress={onPress}>
