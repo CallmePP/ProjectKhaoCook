@@ -151,7 +151,7 @@ const HomeScreen = ({ navigation }) => {
         <TabBarItem label="Home" icon="home" onPress={() => console.log('ไปที่หน้า Home')} />
         <TabBarItem label="เก็บสูตร" icon="bookmark" onPress={() => console.log('ไปที่หน้า เก็บสูตร')} />
         <TabBarItem label="สุ่มเมนู" icon="restaurant" onPress={() => navigation.navigate('RandomMenuScreen')} />
-        <TabBarItem label="แจ้งเตือน" icon="notifications" onPress={() => console.log('ไปที่หน้า แจ้งเตือน')} />
+        <TabBarItem label="แจ้งเตือน" icon="notifications" onPress={() => navigation.navigate('NotificationScreen')} />
         <TabBarItem label="โปรไฟล์" icon="person" onPress={() => console.log('ไปที่หน้า โปรไฟล์')} />
       </View>
     </View>
