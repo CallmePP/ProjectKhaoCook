@@ -8,7 +8,7 @@ const RandomMenuScreen = ({ navigation }) => {
         <Text style={styles.title}>สุ่มการ์ดเพื่อหามนู</Text>
         <Text style={styles.subTitle}>สุ่มเลย หิวแล้ว!</Text>
         <Image
-          source={require('../assets/image.png')}
+          source={require('../assets/card.png')}
           style={styles.image}
         />
         <Image
