@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // นำเข้า hook สำหรับการนำทาง
 
-const App = () => {
+const MyProfileScreen = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followerCount, setFollowerCount] = useState(2500);
+    const navigation = useNavigation(); // เรียกใช้งาน hook
 
     const handleFollowButtonPress = () => {
         setIsFollowing(!isFollowing);
@@ -12,6 +14,10 @@ const App = () => {
         } else {
             setFollowerCount(followerCount - 1);
         }
+    };
+
+    const handleEditProfilePress = () => {
+        navigation.navigate('EditProfile'); // นำทางไปยังหน้า EditProfile
     };
 
     return (
@@ -46,6 +52,12 @@ const App = () => {
                         {isFollowing ? 'Unfollow' : 'Follow'}
                     </Text>
                 </TouchableOpacity>
+
+                {/* ปุ่มแก้ไขโปรไฟล์ */}
+                <TouchableOpacity style={styles.changeProfileButton} onPress={handleEditProfilePress}>
+                    <Text style={styles.changeProfileButtonText}>เปลี่ยนรูปโปรไฟล์</Text>
+                </TouchableOpacity>
+
                 <View style={styles.statsContainer}>
                     <View style={styles.statsItem}>
                         <Text style={styles.statsNumber}>40</Text>
@@ -65,41 +77,14 @@ const App = () => {
             {/* ส่วนโพสต์ */}
             <Text style={styles.postSectionTitle}>Post</Text>
             <ScrollView style={styles.postContainer}>
-                <View style={styles.postItem}>
-                    <View style={styles.postContent}>
-                        <Text style={styles.postTitle}>สเต็กแซลมอน</Text>
-                        <Text style={styles.postDescription}>แซลมอนเนื้อนุ่มละมุนลิ้น ผมนี่อยากทำอะไรอร่อยๆ ก็ทำนะ</Text>
-                        <View style={styles.postAuthor}>
-                            <Image source={require('./assets/cat.png')} style={styles.postAuthorImage} />
-                            <Text style={styles.postAuthorName}>เชฟแมว</Text>
-                            <View style={styles.chefProBadgeSmall}>
-                                <Text style={styles.chefProBadgeTextSmall}>เชฟมือโปร</Text>
-                            </View>
-                        </View>
-                    </View>
-                    <Image source={require('./assets/salmon.png')} style={styles.postImage} />
-                </View>
-
-                <View style={styles.postItem}>
-                    <View style={styles.postContent}>
-                        <Text style={styles.postTitle}>ปลาทับทิมสามรส</Text>
-                        <Text style={styles.postDescription}>เมนูที่เหมาะกับทุกคนในครอบครัว</Text>
-                        <View style={styles.postAuthor}>
-                            <Image source={require('./assets/cat.png')} style={styles.postAuthorImage} />
-                            <Text style={styles.postAuthorName}>เชฟแมว</Text>
-                            <View style={styles.chefProBadgeSmall}>
-                                <Text style={styles.chefProBadgeTextSmall}>เชฟมือโปร</Text>
-                            </View>
-                        </View>
-                    </View>
-                    <Image source={require('./assets/fish.png')} style={styles.postImage} />
-                </View>
+                {/* โพสต์ต่างๆ */}
             </ScrollView>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    // สไตล์เดิมของคุณ
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -202,58 +187,17 @@ const styles = StyleSheet.create({
     postContainer: {
         flex: 1,
     },
-    postItem: {
-        flexDirection: 'row',
-        padding: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#eee',
-    },
-    postImage: {
-        width: 150,
-        height: 150,
+    changeProfileButton: { // สไตล์ของปุ่ม "เปลี่ยนรูปโปรไฟล์" ซึ่งเราจะใช้เป็นปุ่ม "แก้ไขโปรไฟล์"
+        marginTop: 15,
+        backgroundColor: '#EBE4E0',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         borderRadius: 8,
-        marginLeft: 16,
     },
-    postContent: {
-        flex: 1,
-        marginRight: 16,
-    },
-    postTitle: {
+    changeProfileButtonText: { // สไตล์ข้อความในปุ่ม "เปลี่ยนรูปโปรไฟล์"
         fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 4,
-    },
-    postDescription: {
-        fontSize: 14,
-        color: '#666',
-        marginBottom: 8,
-    },
-    postAuthor: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    postAuthorImage: {
-        width: 24,
-        height: 24,
-        borderRadius: 12,
-        marginRight: 5,
-    },
-    postAuthorName: {
-        fontSize: 12,
-        color: '#666',
-    },
-    chefProBadgeSmall: {
-        backgroundColor: '#E4AE03',
-        paddingVertical: 2,
-        paddingHorizontal: 4,
-        borderRadius: 8,
-        marginLeft: 5,
-    },
-    chefProBadgeTextSmall: {
-        color: '#000',
-        fontSize: 8,
-        fontWeight: 'bold',
+        color: '#333',
     },
 });
 
-export default App;
+export default MyProfileScreen;
