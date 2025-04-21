@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image, ScrollView, Dimensions, StyleSheet } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
   const [search, setSearch] = useState('');
   const [history, setHistory] = useState(['ข้าวต้ม', 'ปลาทอด']);
-  const [selectedTab, setSelectedTab] = useState('Home');
 
   const images = [
     { uri: 'https://www.singhbin.com/wp-content/uploads/2023/08/american-shrimp-fried-rice-served-with-chili-fish-sauce-thai-food_1150-26576.jpg' },
@@ -145,36 +143,8 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text style={{ fontSize: 30, color: 'white' }}>+</Text>
       </TouchableOpacity>
-
-      {/* Bottom Tab Bar */}
-      <View style={styles.tabBar}>
-        <TabBarItem label="Home" icon="home" onPress={() => console.log('ไปที่หน้า Home')} />
-        <TabBarItem label="เก็บสูตร" icon="bookmark" onPress={() => console.log('ไปที่หน้า เก็บสูตร')} />
-        <TabBarItem label="สุ่มเมนู" icon="restaurant" onPress={() => navigation.navigate('RandomMenuScreen')} />
-        <TabBarItem label="แจ้งเตือน" icon="notifications" onPress={() => console.log('ไปที่หน้า แจ้งเตือน')} />
-        <TabBarItem label="โปรไฟล์" icon="person" onPress={() => console.log('ไปที่หน้า โปรไฟล์')} />
-      </View>
     </View>
   );
 };
-
-const TabBarItem = ({ label, icon, onPress }) => (
-  <TouchableOpacity style={{ alignItems: 'center' }} onPress={onPress}>
-    <Ionicons name={icon} size={24} color="#d36c00" />
-    <Text style={{ fontSize: 12, color: '#d36c00' }}>{label}</Text>
-  </TouchableOpacity>
-);
-
-const styles = StyleSheet.create({
-  tabBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    height: 60,
-    borderTopWidth: 1,
-    borderTopColor: '#ccc'
-  }
-});
 
 export default HomeScreen;

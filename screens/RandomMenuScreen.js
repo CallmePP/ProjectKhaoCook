@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import CustomTabBar from '../screens/CustomTabBar';
 
 const RandomMenuScreen = ({ navigation }) => {
   return (
@@ -9,18 +8,17 @@ const RandomMenuScreen = ({ navigation }) => {
         <Text style={styles.title}>สุ่มการ์ดเพื่อหามนู</Text>
         <Text style={styles.subTitle}>สุ่มเลย หิวแล้ว!</Text>
         <Image
-          source={require('/Volumes/drive DDD/ProjectKhaoCook/ProjectKhaoCook/assets/image.png')}
+          source={require('../assets/image.png')}
           style={styles.image}
         />
         <Image
-          source={require('/Volumes/drive DDD/ProjectKhaoCook/ProjectKhaoCook/assets/Ellipse 4.png')}
+          source={require('../assets/Ellipse 4.png')}
           style={styles.shadowimage}
         />
         <TouchableOpacity style={styles.randomButton} onPress={() => {/* Logic สำหรับการสุ่มเมนู */}}>
           <Text style={styles.buttonText}>RANDOM</Text>
         </TouchableOpacity>
       </View>
-      <CustomTabBar navigation={navigation} />
     </View>
   );
 };
@@ -28,13 +26,13 @@ const RandomMenuScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3F1F1', // สีพื้นหลังตามภาพ
+    backgroundColor: '#F3F1F1',
   },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 50, // ให้เนื้อหาห่างจาก TabBar
+    paddingBottom: 50,
   },
   title: {
     fontSize: 24,
@@ -46,16 +44,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: 262.55, // ปรับขนาดตามต้องการ
-    height: 379.63, // ปรับขนาดตามต้องการ
+    width: 262.55,
+    height: 379.63,
     marginBottom: 20,
     padding: 20,
-    borderRadius: 17, 
+    borderRadius: 17,
     borderWidth: 5,
-    borderColor: '#FFF', // สีกรอบ
+    borderColor: '#FFF',
+  },
+  shadowimage: {
+    top: 20,
   },
   randomButton: {
-    backgroundColor: '#FFC9AA', // สีปุ่ม
+    backgroundColor: '#FFC9AA',
     padding: 10,
     borderRadius: 30,
     height: 40,
