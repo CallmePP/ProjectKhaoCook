@@ -56,20 +56,13 @@ const styles = StyleSheet.create({
     top: 20,
   },
   randomButton: {
-    backgroundColor: '#FFC9AA',
+    backgroundColor: '#d36c00',
     padding: 10,
     borderRadius: 30,
     height: 40,
     width: 160,
     shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3.84,
-    elevation: 5,
-    justifyContent: 'center',
+    boxShadow: '0px 5px 5px rgba(0, 0, 0, 0.25)',
     top: 80,
   },
   buttonText: {

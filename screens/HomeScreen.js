@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons'; 
 
 const { width } = Dimensions.get('window');
 
@@ -36,12 +37,25 @@ const HomeScreen = ({ navigation }) => {
             Khao<Text style={{ color: 'gold' }}>Cook</Text>
           </Text>
 
-          <View style={{ flexDirection: 'row', marginTop: 10, backgroundColor: '#eee', padding: 10, borderRadius: 10 }}>
+          {/* ช่องค้นหา + ไอคอน */}
+          <View style={{
+            flexDirection: 'row',
+            marginTop: 25,
+            backgroundColor: '#EEE4DA',
+            borderRadius: 12,
+            width: 380,
+            height: 40,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            alignSelf: 'center',
+            paddingHorizontal: 10
+          }}>
+            <Ionicons name="search" size={18} color="#999" style={{ marginRight: 8 }} />
             <TextInput 
               placeholder="ค้นหา"
               value={search}
               onChangeText={setSearch}
-              style={{ flex: 1, fontSize: 16 }}
+              style={{ flex: 1, fontSize: 14 }}
             />
           </View>
 
@@ -51,7 +65,8 @@ const HomeScreen = ({ navigation }) => {
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity 
-                style={{ padding: 8, backgroundColor: '#ddd', margin: 5, borderRadius: 10 }}
+                style={{ padding: 8, backgroundColor: '#EDEDED', margin: 15, borderRadius: 12, width: 92, height: 36,
+                alignItems: 'center'}}
                 onPress={() => handleHistorySelect(item)}
               >
                 <Text>{item}</Text>

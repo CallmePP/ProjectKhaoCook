@@ -1,8 +1,26 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-const NotificationScreen = () => (
-  <View><Text>Saved Recipes Screen</Text></View>
-);
+const NotificationScreen = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>NotificationScreen</Text>
+      </View>
+  )
+}
 
-export default NotificationScreen;
+export default NotificationScreen
+
+const styles = StyleSheet.create(
+    {
+        container: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        text: {
+            fontSize: 20,
+            fontWeight: 'bold',
+        },
+
+    })
