@@ -74,6 +74,9 @@ const NotificationScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#d36c00',alignSelf: 'center', }}>
+                    Khao<Text style={{ color: 'gold' }}>Cook</Text>
+                  </Text>
       <Text style={styles.header}>การแจ้งเตือน</Text>
       {renderSection('วันนี้', todayNoti)}
       {renderSection('เมื่อวาน', yesterdayNoti)}
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F3F1F1',
     paddingHorizontal: 20,
-    paddingTop: 40, 
+    paddingTop: 20, 
   },
   header: {
     fontSize: 18,

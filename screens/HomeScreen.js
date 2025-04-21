@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
-import CustomTabBar from './CustomTabBar';
 const { width } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
@@ -31,8 +30,8 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView style={{ flex: 1, backgroundColor: '#f9f9f9' }}>
-        <View style={{ padding: 16, paddingBottom: 80 }}>
+      <ScrollView style={{ flex: 1, backgroundColor: '#F3F1F1' }}>
+        <View style={{ padding: 20, paddingBottom: 80 }}>
           <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#d36c00', alignSelf: 'center' }}>
             Khao<Text style={{ color: 'gold' }}>Cook</Text>
           </Text>

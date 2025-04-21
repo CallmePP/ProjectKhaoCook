@@ -9,6 +9,9 @@ const Profile = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#d36c00',alignSelf:'center', }}>
+                          Khao<Text style={{ color: 'gold' }}>Cook</Text>
+      </Text>
       <Text style={styles.text}>My Profile</Text>
       <TouchableOpacity onPress={handleLogout} style={styles.button}>
         <Text style={styles.buttonText}>Log out</Text>
@@ -22,8 +25,8 @@ export default Profile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#F3F1F1',
+    paddingTop: 20,
   },
   text: {
     fontSize: 20,

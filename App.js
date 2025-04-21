@@ -11,6 +11,7 @@ import Notifications from "./screens/NotificationScreen";
 import Profile from "./screens/MyProfile";
 import SavedRecipes from "./screens/SaveScreen";
 import CustomTabBar from "./screens/CustomTabBar"; // เพิ่ม CustomTabBar ที่นี่
+import ResultScreen from './screens/ResultScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,6 +38,7 @@ const App = () => {
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Result" component={ResultScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

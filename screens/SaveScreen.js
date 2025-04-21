@@ -1,7 +1,10 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, TextInput } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons'; 
 
 const App = () => {
+    const [search, setSearch] = useState('');
+
     const recipes = [
         {
             title: 'สเต็กแซลมอน',
@@ -29,34 +32,56 @@ const App = () => {
         },
     ];
 
+    // ฟิลเตอร์สูตรอาหารตามคำค้นหา
+    const filteredRecipes = recipes.filter(recipe =>
+        recipe.title.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <View style={styles.container}>
-            {/* ส่วนเนื้อหา */}
-            <ScrollView style={styles.content}>
+    <View style={{ alignItems: 'center', }}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#d36c00' }}>
+        Khao<Text style={{ color: 'gold' }}>Cook</Text>
+      </Text>
+    </View>
+
+    <ScrollView style={styles.content}>
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>ห้องเก็บสูตร</Text>
+      </View>
+
+      <View style={{
+        flexDirection: 'row',
+        marginTop: 25,
+        backgroundColor: '#EEE4DA',
+        borderRadius: 12,
+        width: 380,
+        height: 40,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        alignSelf: 'center',
+        paddingHorizontal: 10
+      }}>
+        <Ionicons name="search" size={18} color="#999" style={{ marginRight: 8 }} />
+        <TextInput 
+          placeholder="ค้นหา"
+          value={search}
+          onChangeText={setSearch}
+          style={{ flex: 1, fontSize: 14 }}
+        />
+      </View>
+
                 <View style={styles.sectionHeader}>
-                    <Text style={styles.sectionTitle}>ห้องเก็บสูตร</Text>
+                    <Text style={styles.sectionTitle}>บันทึกไว้ {filteredRecipes.length} สูตร</Text>
                 </View>
 
-                <View style={styles.searchBar}>
-                    <Image source={require('../assets/ปลาราดพริก.png')} style={styles.searchIcon} />
-                    <TextInput style={styles.searchInput} placeholder="ค้นหา" />
-                </View>
-
-                <View style={styles.sectionHeader}>
-                    <Text style={styles.sectionTitle}>บันทึกไว้ 3 สูตร</Text>
-                </View>
-
-                {recipes.map((recipe, index) => (
+                {filteredRecipes.map((recipe, index) => (
                     <View key={index} style={styles.recipeCard}>
                         <View style={styles.recipeText}>
                             <Text style={styles.recipeTitle}>{recipe.title}</Text>
                             <Text style={styles.recipeDescription}>{recipe.description}</Text>
                             <View style={styles.authorContainer}>
-                                {recipe.authorImage ? (
-                                    <Image source={recipe.authorImage} style={styles.authorImageStyle} />
-                                ) : (
-                                    <Image source={require('../assets/ปลาราดพริก.png')} style={styles.authorIcon} />
-                                )}
+                                <Image source={recipe.authorImage} style={styles.authorImageStyle} />
                                 <Text style={styles.authorName}>{recipe.author}</Text>
                                 {recipe.chefTitle && (
                                     <View
@@ -81,62 +106,21 @@ const App = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 40, // เพิ่ม padding เพื่อขยับเนื้อหาลงมาจากขอบบน
-    },
-    header: {
-        paddingVertical: 15,
-        paddingHorizontal: 20,
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    backButton: {
-        padding: 8,
-    },
-    backIcon: {
-        width: 24,
-        height: 24,
-        resizeMode: 'contain',
-        tintColor: '#333',
-    },
-    headerTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        flexDirection: 'row',
+        backgroundColor: '#F3F1F1',
+        paddingTop: 19.8,
     },
     content: {
         flex: 1,
         paddingHorizontal: 20,
     },
     sectionHeader: {
-        marginTop: 20, // เพิ่ม marginTop เพื่อให้หัวข้อแต่ละส่วนขยับลงจากขอบบน
+        marginTop: 20,
         marginBottom: 8,
     },
     sectionTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#333',
-    },
-    searchBar: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#EEE4DA',
-        borderRadius: 20,
-        paddingHorizontal: 12,
-        marginBottom: 16,
-    },
-    searchIcon: {
-        width: 18,
-        height: 18,
-        marginRight: 8,
-        tintColor: '#999',
-    },
-    searchInput: {
-        flex: 1,
-        paddingVertical: 8,
-        fontSize: 14,
-        width: '100%',
     },
     recipeCard: {
         flexDirection: 'row',
@@ -170,12 +154,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    authorIcon: {
-        width: 12,
-        height: 12,
-        marginRight: 4,
-        tintColor: '#999',
-    },
     authorImageStyle: {
         width: 16,
         height: 16,
@@ -191,35 +169,6 @@ const styles = StyleSheet.create({
         height: 150,
         resizeMode: 'cover',
         borderRadius: 0,
-    },
-    bottomNav: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingVertical: 8,
-        borderTopWidth: 1,
-        borderTopColor: '#eee',
-    },
-    navItem: {
-        alignItems: 'center',
-    },
-    navIcon: {
-        width: 22,
-        height: 22,
-        resizeMode: 'contain',
-        tintColor: '#666',
-    },
-    navIconActive: {
-        width: 22,
-        height: 22,
-        resizeMode: 'contain',
-        tintColor: '#ff9800',
-    },
-    navLabel: {
-        fontSize: 10,
-        color: '#666',
-    },
-    activeNavLabel: {
-        color: '#ff9800',
     },
     chefProBadgeSmall: {
         backgroundColor: '#FFC300',
