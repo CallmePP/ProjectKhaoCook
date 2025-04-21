@@ -1,66 +1,82 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, Animated } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import CustomTabBar from '../screens/CustomTabBar';
 
-const RandomMenuScreen = () => {
-  const [rotateValue] = useState(new Animated.Value(0));
-
-  const handleRandom = () => {
-    Animated.sequence([
-      Animated.timing(rotateValue, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true
-      }),
-      Animated.timing(rotateValue, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true
-      })
-    ]).start();
-  };
-
-  const rotate = rotateValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '10deg']
-  });
-
+const RandomMenuScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, backgroundColor: '#FDF7F1', alignItems: 'center', justifyContent: 'center' }}>
-      {/* โลโก้ */}
-      <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#d36c00', alignSelf: 'center', justifyContent: 'center' }}>
-          Khao<Text style={{ color: 'gold' }}>Cook</Text>
-        </Text>
-
-      {/* ข้อความ */}
-      <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#6D4C41', marginTop: 10 }}>สุ่มการ์ดเพื่อหาเมนู</Text>
-      <Text style={{ fontSize: 16, color: '#A1887F', marginBottom: 20 }}>สุ่มเลย หิวแล้ว!</Text>
-
-      {/* แอนิเมชันการ์ด */}
-      <Animated.View style={{ transform: [{ rotate }], marginBottom: 20 }}>
-        <Image 
-          source={{ uri: 'https://aroi-mark.com/wp-content/uploads/2020/06/%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B8%AB%E0%B8%A1%E0%B8%B92-1024x1024.jpg' }} 
-          style={{ width: 180, height: 250, resizeMode: 'contain' }} 
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.title}>สุ่มการ์ดเพื่อหามนู</Text>
+        <Text style={styles.subTitle}>สุ่มเลย หิวแล้ว!</Text>
+        <Image
+          source={require('/Volumes/drive DDD/ProjectKhaoCook/ProjectKhaoCook/assets/image.png')}
+          style={styles.image}
         />
-      </Animated.View>
-
-      {/* ปุ่ม RANDOM */}
-      <TouchableOpacity 
-        onPress={handleRandom} 
-        style={{
-          backgroundColor: '#FBC3A7', 
-          paddingHorizontal: 30, 
-          paddingVertical: 12, 
-          borderRadius: 20, 
-          shadowColor: '#000', 
-          shadowOpacity: 0.1, 
-          shadowRadius: 5, 
-          elevation: 3
-        }}
-      >
-        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#000' }}>RANDOM</Text>
-      </TouchableOpacity>
+        <Image
+          source={require('/Volumes/drive DDD/ProjectKhaoCook/ProjectKhaoCook/assets/Ellipse 4.png')}
+          style={styles.shadowimage}
+        />
+        <TouchableOpacity style={styles.randomButton} onPress={() => {/* Logic สำหรับการสุ่มเมนู */}}>
+          <Text style={styles.buttonText}>RANDOM</Text>
+        </TouchableOpacity>
+      </View>
+      <CustomTabBar navigation={navigation} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F3F1F1', // สีพื้นหลังตามภาพ
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 50, // ให้เนื้อหาห่างจาก TabBar
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  subTitle: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  image: {
+    width: 262.55, // ปรับขนาดตามต้องการ
+    height: 379.63, // ปรับขนาดตามต้องการ
+    marginBottom: 20,
+    padding: 20,
+    borderRadius: 17, 
+    borderWidth: 5,
+    borderColor: '#FFF', // สีกรอบ
+  },
+  randomButton: {
+    backgroundColor: '#FFC9AA', // สีปุ่ม
+    padding: 10,
+    borderRadius: 30,
+    height: 40,
+    width: 160,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 3.84,
+    elevation: 5,
+    justifyContent: 'center',
+    top: 80,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    color: '#fff',
+  },
+});
 
 export default RandomMenuScreen;
