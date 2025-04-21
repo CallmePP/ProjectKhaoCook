@@ -1,13 +1,17 @@
-// src/screens/LoginScreen.js
 import React from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from "react-native";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import GoogleLoginButton from "../components/GoogleLoginButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native"; // ใช้ useNavigation hook
 
 const LoginScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // ใช้ hook สำหรับการนำทาง
+
+  // ฟังก์ชัน handleLogin ที่จะนำทางไปหน้า HomeScreen
+  const handleLogin = () => {
+    navigation.navigate("MainTabs"); // ไปที่ TabNavigator ที่เป็นหน้าหลัก
+  };
 
   return (
     <ImageBackground 
@@ -27,11 +31,8 @@ const LoginScreen = () => {
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
 
-          {/* ✅ เปลี่ยนตรงนี้ให้ไปหน้า Home */}
-          <Button
-            title="Login"
-            onPress={() => navigation.navigate("Home")}
-          />
+          {/* ปุ่ม Login */}
+          <Button title="Login" onPress={handleLogin} /> {/* เรียกใช้ handleLogin */}
 
           <Text style={styles.orText}>──────── or ────────</Text>
           <GoogleLoginButton onPress={() => {}} />

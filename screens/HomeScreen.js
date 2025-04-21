@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
-
+import CustomTabBar from './CustomTabBar';
 const { width } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
