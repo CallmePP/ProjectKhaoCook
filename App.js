@@ -13,6 +13,7 @@ import SavedRecipes from "./screens/SaveScreen";
 import CustomTabBar from "./screens/CustomTabBar"; // เพิ่ม CustomTabBar ที่นี่
 import ResultScreen from './screens/ResultScreen';
 import SettingScreen from "./screens/SettingScreen";
+import EditProfile from './screens/EditProfile'; // เพิ่ม EditProfile ที่นี่
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,6 +42,7 @@ const App = () => {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Result" component={ResultScreen} />
         <Stack.Screen name="SettingScreen" component={SettingScreen} />
+        <Stack.Screen name="EditScreen" component={EditProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

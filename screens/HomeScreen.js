@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
     { id: '3', name: 'เมนูทานเล่น', image: { uri: 'https://s359.kapook.com/pagebuilder/f6558105-e6e7-419b-a04d-edb108647bb1.jpg' } },
     { id: '4', name: 'ของหวาน', image: { uri: 'https://static.wixstatic.com/media/018989_d93cf2c3b9094a66aa06e7aad5b35c3e~mv2.png' } },
     { id: '5', name: 'อาหารคลีน', image: { uri: 'https://img.wongnai.com/p/1920x0/2017/11/16/bcb81b277172496598bd18a25617a0a7.jpg' } },
-    { id: '6', name: 'เมนูน้ำ', image: { uri: 'https://cdn-hhahh.nitrocdn.com/xJoTomMYpDqGcsZczeiXuVFPaoqbQAtE/assets/images/optimized/rev-fd1ceb8/www.joozejuice.com/wp-content/uploads/2023/06/25.Strawberry_Protein_MilkshakeArticleHeader_769x497_DSK-1024x662.jpg' } },
+    { id: '6', name: 'เมนูน้ำ', image: { uri: 'https://blog.allonline.7eleven.co.th/wp-content/uploads/2020/04/colorful-fruit-smoothies-composition-wooden-background_23-2148227532.jpg' } },
     { id: '7', name: 'เมนูยำ', image: { uri: 'https://lakcookingschool.com/web-upload/fck/editor-pic/images/%E0%B8%A2%E0%B8%B3/S__39591994.jpg' } },
   ];
 

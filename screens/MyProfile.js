@@ -27,9 +27,12 @@ const MyProfile = ({ navigation }) => {
                     <Text style={styles.profileName}>น้องมะเขือ</Text>
                 </View>
                 <Text style={styles.profileDescription}>พึ่งเริ่มหัดทำอาหารค่ะ</Text>
-                <TouchableOpacity style={styles.editProfileButton}>
-                    <Text style={styles.editProfileButtonText}>แก้ไขโปรไฟล์</Text>
-                </TouchableOpacity>
+                <TouchableOpacity
+    style={styles.editProfileButton}
+    onPress={() => navigation.navigate('EditScreen')} // 👉 ไปหน้า EditScreen
+>
+    <Text style={styles.editProfileButtonText}>แก้ไขโปรไฟล์</Text>
+</TouchableOpacity>
                 <View style={styles.statsContainer}>
     <View style={styles.statsItem}>
         <Text style={styles.statsNumber}>500</Text>
