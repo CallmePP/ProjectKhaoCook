@@ -60,7 +60,7 @@ const SignUpScreen = () => {
     createUserWithEmailAndPassword(auth, trimmedEmail, password)
       .then(() => {
         console.log("User registered successfully");  // ตรวจสอบว่าเกิดการสมัครสมาชิกสำเร็จ
-        navigation.navigate("MainTabs");
+        navigation.navigate("Login"); // กลับไปที่หน้า Login
       })
       .catch((err) => {
         console.log("Error: ", err.message);  // พิมพ์ข้อความข้อผิดพลาดจาก Firebase
