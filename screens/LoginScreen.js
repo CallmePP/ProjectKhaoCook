@@ -1,15 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from "react-native";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
-import GoogleLoginButton from "../components/GoogleLoginButton";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../firebase/config"; // นำเข้า Firebase Authentication
+import { signInWithEmailAndPassword } from "firebase/auth"; // ฟังก์ชันล็อกอิน
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // สถานะการโหลด
 
+  // ฟังก์ชันตรวจสอบอีเมล
+  const validateEmail = (email) => {
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(email);
+  };
+
+  // ฟังก์ชันล็อกอิน
   const handleLogin = () => {
-    navigation.navigate("MainTabs");
+    setIsLoading(true); // เริ่มสถานะการโหลด
+
+    const trimmedEmail = email.trim(); // ตัดช่องว่างรอบๆ อีเมล
+
+    // ตรวจสอบอีเมล
+    if (!validateEmail(trimmedEmail)) {
+      setError("กรุณากรอกอีเมลให้ถูกต้อง");
+      setIsLoading(false); // หยุดสถานะการโหลดเมื่อเกิดข้อผิดพลาด
+      return;
+    }
+
+    // ฟังก์ชันล็อกอิน
+    signInWithEmailAndPassword(auth, trimmedEmail, password)
+      .then(() => {
+        console.log("User logged in successfully"); // ตรวจสอบว่าเข้าสู่ระบบสำเร็จ
+        navigation.navigate("MainTabs"); // ไปที่หน้าหลักเมื่อเข้าสู่ระบบสำเร็จ
+      })
+      .catch((err) => {
+        console.log("Error: ", err.message); // แสดงข้อผิดพลาดจาก Firebase
+        setError("เกิดข้อผิดพลาดในการเข้าสู่ระบบ: " + err.message); 
+        setIsLoading(false); // หยุดสถานะการโหลดเมื่อเกิดข้อผิดพลาด
+      });
   };
 
   return (
@@ -23,23 +56,31 @@ const LoginScreen = () => {
 
         <View style={styles.form}>
           <Text style={styles.header}>Login</Text>
-          <InputField placeholder="Email" />
-          <InputField placeholder="Password" secureTextEntry />
+          <InputField
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}  // เก็บค่าอีเมล
+          />
+          <InputField
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}  // เก็บค่ารหัสผ่าน
+          />
           
           <TouchableOpacity>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
 
-          <Button title="Login" onPress={handleLogin} />
+          <Button title={isLoading ? "Logging In..." : "Login"} onPress={handleLogin} />
 
-          {/* Divider with "or" */}
+          {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
           <View style={styles.orContainer}>
             <View style={styles.line} />
             <Text style={styles.orText}>or</Text>
             <View style={styles.line} />
           </View>
-
-          <GoogleLoginButton onPress={() => {}} />
 
           <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
             <Text style={styles.signUpText}>
@@ -120,6 +161,11 @@ const styles = StyleSheet.create({
   signUpLink: {
     color: "#FABC2C",
     fontWeight: "bold",
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 10,
   },
 });
 
