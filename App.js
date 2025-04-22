@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { auth } from "./firebase/config"; // นำเข้า auth จาก firebase/config
+import { onAuthStateChanged } from "firebase/auth"; // นำเข้า onAuthStateChanged
 
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
@@ -15,6 +17,7 @@ import ResultScreen from './screens/ResultScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+//const {user} = useAuth(); // ใช้ useAuth เพื่อดึงข้อมูลผู้ใช้
 
 // Bottom Tab Navigator
 const MainTabNavigator = () => (
@@ -31,10 +34,24 @@ const MainTabNavigator = () => (
 );
 
 const App = () => {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // หากผู้ใช้ล็อกอินแล้ว ให้ไปที่ MainTabs
+        navigation.navigate("MainTabs");
+      } else {
+        // หากยังไม่ได้ล็อกอิน ให้นำไปที่หน้าล็อกอิน
+        navigation.navigate("Login");
+      }
+    });
+
+    // ทำการ unsubscribe เมื่อ component ถูก unmount
+    return unsubscribe;
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* ใช้ MainTabNavigator ให้เป็นหน้าหลัก */}
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
