@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native';
 
 const randomMenus = [
   {
@@ -13,16 +13,44 @@ const randomMenus = [
     image: require('../assets/tumgung.jpg'),
   },
   {
-    title: 'ผัดกะเพรา',
+    title: 'ผัดกะเพราไข่ดาว',
     desc: 'ผัดกะเพราไข่ดาว เมนูสุดคลาสสิกของคนไทย',
     image: require('../assets/31a0a6822ec44703b7a04c79eec9ccfd.jpg'),
+  }, 
+  {
+    title: 'ข้าวผัดกุ้ง',
+    desc: 'ข้าวผัดกุ้ง เมนูง่ายๆ ที่ใครก็ทำได้',
+    image: require('../assets/khaopad.jpg'),
+  },
+  {
+    title: 'ไอศกรีมผลไม้รสส้ม',
+    desc: 'ไอศกรีมผลไม้รสส้ม เหมาะกับวันร้อนๆ',
+    image: require('../assets/iceorange.png'),
   },
 ];
 
 const RandomMenuScreen = ({ navigation }) => {
+  const rotateAnim = useRef(new Animated.Value(0)).current;
+
   const handleRandom = () => {
-    const random = randomMenus[Math.floor(Math.random() * randomMenus.length)];
-    navigation.navigate('Result', { menu: random });
+    Animated.timing(rotateAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start(() => {
+      rotateAnim.setValue(0);
+      const random = randomMenus[Math.floor(Math.random() * randomMenus.length)];
+      navigation.navigate('Result', { menu: random });
+    });
+  };
+
+  const rotateInterpolate = rotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
+  const animatedStyle = {
+    transform: [{ rotateY: rotateInterpolate }],
   };
 
   return (
@@ -33,7 +61,10 @@ const RandomMenuScreen = ({ navigation }) => {
       <View style={styles.content}>
         <Text style={styles.title}>สุ่มการ์ดเพื่อหาเมนู</Text>
         <Text style={styles.subTitle}>สุ่มเลย หิวแล้ว!</Text>
-        <Image source={require('../assets/card.png')} style={styles.image} />
+        <Animated.Image
+          source={require('../assets/card.png')}
+          style={[styles.image, animatedStyle]}
+        />
         <Image source={require('../assets/Ellipse 4.png')} style={styles.shadowimage} />
         <TouchableOpacity style={styles.randomButton} onPress={handleRandom}>
           <Text style={styles.buttonText}>RANDOM</Text>
@@ -74,6 +105,7 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     borderWidth: 5,
     borderColor: '#FFF',
+    backfaceVisibility: 'hidden',
   },
   shadowimage: {
     top: 20,
@@ -89,7 +121,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 5,
     elevation: 5,
-
     top: 80,
   },
   buttonText: {
