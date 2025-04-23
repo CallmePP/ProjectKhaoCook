@@ -1,0 +1,57 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+apply plugin: 'com.google.gms.google-services'  // เพิ่ม Firebase plugin ที่นี่
+
+android {
+    ndkVersion rootProject.ext.ndkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
+
+    namespace "com.khaocook"
+    defaultConfig {
+        applicationId "com.khaocook"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+}
+
+dependencies {
+    // The version of react-native is set by the React Native Gradle Plugin
+    implementation("com.facebook.react:react-android")
+
+    // ถ้าใช้ Hermes ให้เพิ่ม dependecy นี้
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+
+    // Firebase Dependencies
+    implementation "com.google.firebase:firebase-auth:21.0.1"  // Firebase Auth
+    implementation "com.google.firebase:firebase-core:21.0.0"  // Firebase Core
+
+    // เพิ่ม Firebase SDK อื่น ๆ ตามที่ต้องการ เช่น Firestore หรือ Firebase Database
+    // implementation "com.google.firebase:firebase-firestore:24.0.0"
+    // implementation "com.google.firebase:firebase-database:20.0.3"
+}

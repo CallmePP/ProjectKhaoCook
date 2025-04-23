@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "975539540203",
+    "project_id": "khaocook-e6cb9",
+    "storage_bucket": "khaocook-e6cb9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975539540203:android:8758a70f25290828326eae",
+        "android_client_info": {
+          "package_name": "com.khaocook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975539540203-fcbtic7bsgfm0lofl0s65ad7mj7gsm5h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.khaocook",
+            "certificate_hash": "aedc1e74a40b5ba467ea649124442cad451d7804"
+          }
+        },
+        {
+          "client_id": "975539540203-6vr93r73vrihsklvj5rs5n6a7jo4vt97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHKAUMZ2pV8kFYl4pnbPvHIMgIgnuTJ3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975539540203-6vr93r73vrihsklvj5rs5n6a7jo4vt97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

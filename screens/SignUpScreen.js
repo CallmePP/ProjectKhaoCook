@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
-import { Feather } from "@expo/vector-icons"; // เพิ่มไอคอน
+import { Feather } from "@expo/vector-icons";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../firebase/config"; // นำเข้า Firebase Authentication
+import { createUserWithEmailAndPassword } from 'firebase/auth'; // ใช้สำหรับการสมัครสมาชิก
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
+  
+  // สร้าง state สำหรับ email และ password
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleSignUp = async () => {
+    if (password === confirmPassword) {
+      try {
+        // ใช้ Firebase ลงทะเบียนผู้ใช้ใหม่
+        await createUserWithEmailAndPassword(auth, email, password);
+        navigation.navigate("Login", { email }); // ไปที่หน้า Login หลังสมัครเสร็จ
+      } catch (error) {
+        // จัดการข้อผิดพลาดที่ Firebase แจ้งให้ชัดเจน
+        if (error.code === 'auth/invalid-email') {
+          alert("โปรดกรอกที่อยู่อีเมลที่ถูกต้อง");
+        } else if (error.code === 'auth/email-already-in-use') {
+          alert("อีเมลนี้ถูกใช้ไปแล้ว");
+        } else {
+          alert(error.message); // ถ้ามีข้อผิดพลาดอื่น ๆ
+        }
+      }
+    } else {
+      alert("Password and Confirm Password do not match");
+    }
+  };
 
   return (
     <ImageBackground 
@@ -21,10 +49,24 @@ const SignUpScreen = () => {
             <Text style={styles.backText}>Back to login</Text>
           </TouchableOpacity>
           <Text style={styles.title}>Sign Up</Text>
-          <InputField placeholder="Email" />
-          <InputField placeholder="Password" secureTextEntry />
-          <InputField placeholder="Confirm Password" secureTextEntry />
-          <Button title="Sign Up" onPress={() => {}} />
+          <InputField 
+            placeholder="Email" 
+            value={email} 
+            onChangeText={setEmail} 
+          />
+          <InputField 
+            placeholder="Password" 
+            secureTextEntry 
+            value={password} 
+            onChangeText={setPassword} 
+          />
+          <InputField 
+            placeholder="Confirm Password" 
+            secureTextEntry 
+            value={confirmPassword} 
+            onChangeText={setConfirmPassword} 
+          />
+          <Button title="Sign Up" onPress={handleSignUp} />
         </View>
       </View>
     </ImageBackground>
