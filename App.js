@@ -36,7 +36,6 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* ใช้ MainTabNavigator ให้เป็นหน้าหลัก */}
         <Stack.Screen name="MainTabs" component={MainTabNavigator} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
